@@ -1,4 +1,3 @@
-% Database of individuals
 male(miguel).
 male(norberto).
 male(david).
@@ -10,7 +9,6 @@ female(juliana).
 female(laura).
 female(sara).
 
-% Family relationships
 father(david, juliana).
 father(miguel, sara).
 father(david, norberto).
@@ -23,7 +21,6 @@ mother(maria, norberto).
 mother(juana_d_arc, laura).
 mother(juana_d_arc, johan).
 
-% Defining familial connections
 parent(X, Y) :- father(X, Y); mother(X, Y).
 grandfather(X, Y) :- father(X, Z), parent(Z, Y), male(X).
 grandmother(X, Y) :- mother(X, Z), parent(Z, Y), female(X).
@@ -33,12 +30,12 @@ uncle(X, Y) :- sibling(X, Z), parent(Z, Y), male(X).
 aunt(X, Y) :- sibling(X, Z), parent(Z, Y), female(X).
 cousin(X, Y) :- parent(Z, X), parent(W, Y), sibling(Z, W).
 
-% Levels of consanguinity
+% Niveles de consangunidad
 levelConsanguinity(X, Y, 1) :- parent(X, Y); parent(Y, X).
 levelConsanguinity(X, Y, 2) :- sibling(X, Y); sibling(Y, X); grandparent(X, Y); grandparent(Y, X).
 levelConsanguinity(X, Y, 3) :- uncle(X, Y); aunt(X, Y); cousin(X, Y); cousin(Y, X).
 
-% Inheritance distribution logic
+% Logica de distribucion
 distributeInheritance(X, Total, Distribution) :-
     % Collect individuals at each consanguinity level
     findall(Y, levelConsanguinity(X, Y, 1), LevelOneList),
