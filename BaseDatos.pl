@@ -100,9 +100,7 @@ amountByLevel(Total, 3, Amount) :- Amount is Total * 0.10. % 10% para el tercer 
 % Sumar montos si hay duplicados
 sumAmounts(List, Distribution) :-
     % Agrupar los montos por nombre y sumar los montos duplicados
-    findall(Name-TotalAmount, 
-            (setof(Amount, member(Name-Amount, List), Amounts), sum_list(Amounts, TotalAmount)), 
-            Distribution).
+    findall(Name-TotalAmount, (setof(Amount, member(Name-Amount, List), Amounts), sum_list(Amounts, TotalAmount)), Distribution).
 
 % Imprimir la distribución final
 printDistribution([]). % Caso base: no hay más personas para imprimir
