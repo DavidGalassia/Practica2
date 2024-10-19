@@ -13,5 +13,3 @@ El codigo en prolog es util para saber como se distribuye la herencia de alguien
    ```prolog
    distributeInheritance(Individual, TotalInheritance, Distribution).
 
-# Casos de uso:
-1. 
